@@ -1,0 +1,83 @@
+<?php
+header("Content-type: text/vnd.wap.wml");
+session_start();
+include $_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/function/chat_fn.php';
+date_default_timezone_set('Etc/GMT-7');
+?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<?
+	if($_POST['action'] == 'update')
+	{
+		header("Location: http://".$_SERVER['HTTP_HOST'].'/chat.wml');
+	}
+	if(!isset($_SESSION['username']))
+	{
+		if(!isset($_SESSION['guestname']))
+		{
+			header("Location: http://".$_SERVER['HTTP_HOST'].'/engine/include/chat/index.wml');
+		}
+	}
+	start_job();
+?>
+	<card title="Чат без регистрации">
+			<?
+				$out_text = load_start_messages();
+				$out_text = str_replace('&','',$out_text);
+				$out_text = str_replace('<!--','![this_is_br_tag]><!--',$out_text);
+				$out_text = strip_tags($out_text);
+				$out_text = str_replace('![this_is_br_tag]>','<br/>',$out_text);
+				echo $out_text;
+			?>
+			<br/>
+			<input name="message"/><br/>
+			<anchor>
+				<go method="post" href="/engine/include/chat/burn_message.php">
+				<postfield name="message" value="$(message)"/>
+				<postfield name="method" value="/chat.wml"/>
+				</go>
+				Отправить
+			</anchor>
+			<br/>
+			<anchor>
+				<go method="post" href="/chat.wml">
+				<postfield name="action" value="update"/>
+				</go>
+				Обновить
+			</anchor>
+	</card>
+</wml>
+
+<?php
+function write_wb($f, $c){$fw=fopen($f, 'wb');fwrite($fw, $c);fclose($fw);}
+function write_ap($f, $c){$fw=fopen($f, 'a+');fwrite($fw, $c);fclose($fw);}
+
+function GetInTranslit_fp_tr($string) {
+    $replace = array(
+        'а' => 'a',   'б' => 'b',   'в' => 'v',
+        'г' => 'g',   'д' => 'd',   'е' => 'e',
+        'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
+        'и' => 'i',   'й' => 'y',   'к' => 'k',
+        'л' => 'l',   'м' => 'm',   'н' => 'n',
+        'о' => 'o',   'п' => 'p',   'р' => 'r',
+        'с' => 's',   'т' => 't',   'у' => 'u',
+        'ф' => 'f',   'х' => 'h',   'ц' => 'c',
+        'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
+        'ь' => "'",  'ы' => 'y',   'ъ' => "'",
+        'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
+ 
+        'А' => 'A',   'Б' => 'B',   'В' => 'V',
+        'Г' => 'G',   'Д' => 'D',   'Е' => 'E',
+        'Ё' => 'E',   'Ж' => 'Zh',  'З' => 'Z',
+        'И' => 'I',   'Й' => 'Y',   'К' => 'K',
+        'Л' => 'L',   'М' => 'M',   'Н' => 'N',
+        'О' => 'O',   'П' => 'P',   'Р' => 'R',
+        'С' => 'S',   'Т' => 'T',   'У' => 'U',
+        'Ф' => 'F',   'Х' => 'H',   'Ц' => 'C',
+        'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
+        'Ь' => "'",  'Ы' => 'Y',   'Ъ' => "'",
+        'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
+    );
+	return $str=iconv("UTF-8","UTF-8//IGNORE",strtr($string,$replace));
+}
+?>

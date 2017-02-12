@@ -1,0 +1,1 @@
+<img alt='' src='/engine/images/smile/sport/m0760.gif' class="chat_sc chat_sc_js" onclick='onclick_smile(this)'/><img alt='' src='/engine/images/smile/sport/smile52.gif' class="chat_sc chat_sc_js" onclick='onclick_smile(this)'/><img alt='' src='/engine/images/smile/sport/training1.gif' class="chat_sc chat_sc_js" onclick='onclick_smile(this)'/>

@@ -1,0 +1,36 @@
+<?php
+header("Content-type: text/vnd.wap.wml");
+session_start();
+?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<?
+	if(isset($_SESSION['username']) || isset($_SESSION['guestname']))
+	{
+		header("Location: http://".$_SERVER['HTTP_HOST'].'/chat.wml');
+	}
+?>
+	<card title="Чат без регистрации">
+	<p align="center">
+		Логин<br/>
+		<input name="name"/><br/>
+		Пароль (Для зарегистрированных)<br/>
+		<input name="password"/><br/>
+			<anchor>
+				<go method="post" href="/engine/include/chat/function/auth.php">
+				<postfield name="name" value="$(name)"/>
+				<postfield name="password" value="$(password)"/>
+				<postfield name="method" value="mobile"/>
+				</go>
+				Войти
+			</anchor>
+		<br/>
+		<?
+			if($_GET['error_1'] == '1')echo 'Ник занят!<br />';
+			if($_GET['error_1'] == '2')echo 'Максимальное число символов в нике - 15!<br />';
+			if($_GET['error_1'] == '3')echo 'Запрещенные символы! от [А-Я] [A-Z] [0-9] _ и -';
+			if($_GET['error_1'] == '4')echo 'Пользователь с таким ником уже есть в чате.';
+		?>
+		</p>
+	</card>
+</wml>

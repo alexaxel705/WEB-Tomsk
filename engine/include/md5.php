@@ -1,0 +1,1 @@
+<? echo md5($_SERVER['DOCUMENT_ROOT'].'/'.$_POST['m']);?>
