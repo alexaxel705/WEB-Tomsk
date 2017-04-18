@@ -198,6 +198,25 @@
 
 
 	$MTA = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/online.txt');
+	$MTA = str_replace("<br />", "\n", $MTA);
+	$arr = explode("\n", $MTA);
+
+	foreach($arr as $player) {
+		$player = trim($player);
+		if($player != "") {
+			$w++;
+			if(fmod($w,2)==0) {
+				$out .= $cfc_1.'<span title="Написать" onclick="print_message(this); return false;" style="color:#CCCCCC" class="left sh_black chat_color_nick_o cursor_pointer">'.$player.'</span></li>';
+
+			}
+			else {
+				$out .= $cfc_2.'<span title="Написать" onclick="print_message(this); return false;" style="color:#EEEEEE;" class="left sh_black chat_color_nick_o cursor_pointer">'.$player.'</span></li>';
+			}
+		}
+	}
+
+	//'.$login_trans.
+	
 	session_write_close();
 	die(json_encode(
 	  array(
@@ -206,7 +225,7 @@
 		'online_guest' => $out_guest_arr,
 		'g_ve' => $g_ve,
 		'g_vd' => $g_vd,
-		'MTA' => $MTA
+		'MTA' => $out
 	  )
 	));
 
