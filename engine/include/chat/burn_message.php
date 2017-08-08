@@ -77,7 +77,7 @@ $message=str_replace('(mir1.gif)',' <img alt="" class="chat_sc" src="/engine/ima
 	$message = str_replace("&nbsp;", ' ', $message);
 	
 	$message = str_replace('https://', 'http://', $message); 
-	$message = preg_replace('#((http)?://(\S)+[\.](\S)*[^\s.,> )\];\'\"!?])#is', "<a href='\\1'>\\1</a>", $message);
+	$message = preg_replace('#((http)?://(\S)+[\.](\S)*[^\s.,> )\];\'\"!?])#is', "<a target='_blank' href='\\1'>\\1</a>", $message);
 
 	
 	$message = preg_replace('/ {2,}/',' ',$message);//Нельзя больше 1 пробела
