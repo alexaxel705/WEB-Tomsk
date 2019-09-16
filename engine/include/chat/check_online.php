@@ -137,7 +137,7 @@
 				$ch_lock_src = '<img style="border-bottom:1px dashed #58ACFA;" class="right iphone_height_online_status cursor_pointer" alt="В игнор" title="Добавить в игнор" onclick=chat_ignore_act("'.$users_name.'") src="/engine/images/ch_lock.png"/>';
 			}
 			
-			$test_img ='<a title="Анкета" href="/database/profile.php?'.$users_name.'"><img style="border-bottom:1px solid orange;" class="right iphone_height_online_status" alt="Анкета" src="/engine/images/blank_usr.gif"/></a>'.$ch_lock_src;
+			$test_img ='<a title="Анкета" target="_blank" href="/database/profile.php?'.$users_name.'"><img style="border-bottom:1px solid orange;" class="right iphone_height_online_status" alt="Анкета" src="/engine/images/blank_usr.gif"/></a>'.$ch_lock_src;
 			
 			
 			if($ss->g_voice==1)$g_ve++;
