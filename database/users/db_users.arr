@@ -1,1 +1,1 @@
-["alexaxel705","Fucker"]
+["alexaxel705","Fucker","Tanker","System","Server"]
