@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?
 	include $_SERVER['DOCUMENT_ROOT'].'/head_menu.php';
 	include $_SERVER['DOCUMENT_ROOT'].'/database/database_fn.php';
