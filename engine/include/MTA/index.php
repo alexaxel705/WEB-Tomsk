@@ -1,5 +1,5 @@
 <?
-	include("mta_sdk.php");
+	include($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/mta_sdk.php');
 	$input = mta::getInput();
 	mta::doReturn($input[0]);
 	
