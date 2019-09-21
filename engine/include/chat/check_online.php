@@ -196,7 +196,6 @@
 	}
 
 
-
 	$MTA = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/online.txt');
 	$MTA = str_replace("<br />", "\n", $MTA);
 	$arr = explode("\n", $MTA);
@@ -218,6 +217,9 @@
 	//'.$login_trans.
 	
 	session_write_close();
+	
+	
+	
 	die(json_encode(
 	  array(
 		'online_male' => $out_male_arr,

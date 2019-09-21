@@ -110,18 +110,10 @@ $message=str_replace('(mir1.gif)',' <img alt="" class="chat_sc" src="/engine/ima
 	fclose($burn_file);
 	session_write_close();
 
-	
-
-
  
-	$SERVER = new mta ( "109.227.228.4", 22005);
-
-    $RESOURCE = $SERVER->getResource ( "228" ); # We need to get our resource Object
-   
-    $RESOURCE->call("BurnChatMSG", $usr_name_tr, $message, $nick_color); # Try to call the "doPrint" function with a string as an argument
-
-
-
+	$SERVER = new mta("109.227.228.4", 22005);
+    $RESOURCE = $SERVER->getResource("chat");
+    $RESOURCE->call("BurnChatMSG", $usr_name_tr, $message, $nick_color);
 
 	
 	if(isset($_POST['method']))
