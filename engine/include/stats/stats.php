@@ -3,72 +3,77 @@ include $_SERVER['DOCUMENT_ROOT'].'/head_menu.php';
 function page_title(){return "Статистика";}
 
 
-$df = disk_free_space("/");
-$dt = disk_total_space("/");
-
-//	Свободное место
-$freeSpace = $df / 1048576;
-$freeUnit = 'Mb';
-if ($freeSpace >= 1024) {
-	$freeSpace /= 1024;
-	$freeUnit = 'Gb';
+$playtime = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/time.arr'), true)/1000;
+$h = intval($playtime / 3600);
+$m = intval($playtime / 60)%60;
+$s = intval($playtime % 60);
+$out_times = "";
+if($h >= 1)
+{
+	$out_times = $h.' ч. '.$m.' м. '.$s.' с.';
+}
+else if($m >= 1)
+{
+	$out_times = $m.' мин. '.$s.' сек.';
+}
+else if($s > -1)
+{
+	$out_times = $s.' сек.';
 }
 
-//	Занятое место
-$busySpace = ($dt - $df) / 1048576;
-$busyUnit = 'Mb';
-if ($busySpace >= 1024) {
-	$busySpace /= 1024;
-	$busyUnit = 'Gb';
+
+
+
+$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/deaths.arr'), true);
+$deaths = 0;
+
+while(list($key, $val) = each($dat)){
+	while(list($key2, $val2) = each($val)){
+		
+		$deaths = $deaths+$val2;
+	}
 }
-
-//	Всего места
-$totalSpace = $dt / 1048576;
-$totalUnit = 'Mb';
-if ($totalSpace >= 1024) {
-	$totalSpace /= 1024;
-	$totalUnit = 'Gb';
-}
-
-//	Проценты
-$freePer = round($df / $dt * 100.0, 0);			//	Свободного
-if ($freePer > 100)
-	$freePer = 100;
-
-$busyPer = 100 - $freePer;						//	Занятого
-
-
-//	Округляем
-$freeSpace = round($freeSpace, 1);
-$busySpace = round($busySpace, 1);
-$totalSpace = round($totalSpace, 1);
 
 
 ?>
 
 
-
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight+'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth+'px';
+  }
+  
+  function showmap() {
+        document.getElementById("map").src = "http://109.227.228.4/engine/include/MTA/stats/zonesmap.php";
+    }
+  function showdeaths() {
+        document.getElementById("map").src = "http://109.227.228.4/engine/include/MTA/stats/deathmap.php";
+    }
+</script>
 
 <div id="server_stats_all_table">
 
 <div id="server_stats_disk_space_box">
 <center>
-<img src="/engine/images/servers_stats_hdd.png" width="50%" style="vertical-align:bottom; margin-top:-25px;"/>
+<iframe src="http://109.227.228.4/engine/include/MTA/stats/deathmap.php" id="map" frameborder="0" scrolling="no" onload="resizeIframe(this)"> </iframe>
+<br />
+<b onclick="showdeaths()">Смерти</b> - <b onclick="showmap()">Зоны</b>
 <div class="progressbar_server_stats" id="pb_server_stats"><div></div></div>
 <div id="server_stats_space_box_var">
-<div class="server_stats_space_box_stats_1 left border_shadow">Всего:</div>
-<div class="server_stats_space_box_stats_2 left border_shadow">Свободно:</div>
-<div class="server_stats_space_box_stats_3 left border_shadow">Занято:</div>
-<div class="server_stats_space_box_stats_1 left border_shadow"><?php echo $totalSpace." GB"; ?></div>
-<div class="server_stats_space_box_stats_2 left border_shadow"><?php echo $freeSpace." GB"; ?></div>
-<div class="server_stats_space_box_stats_3 left border_shadow"><?php echo $busySpace." GB"; ?></div>
+<div class="server_stats_space_box_stats_1 left border_shadow">Всего</div>
+<div class="server_stats_space_box_stats_2 left border_shadow">Свободно</div>
+<div class="server_stats_space_box_stats_3 left border_shadow">Занято</div>
+<div class="server_stats_space_box_stats_1 left border_shadow"><?php echo "свободно"; ?></div>
+<div class="server_stats_space_box_stats_2 left border_shadow"><?php echo "свободно"; ?></div>
+<div class="server_stats_space_box_stats_3 left border_shadow"><?php echo $busySpace."свободно"; ?></div>
 </div>
 </center>
 </div>
-<div class="server_stats_users_box_max">Всего пользователей: <?php $dDir = opendir($_SERVER['DOCUMENT_ROOT'].'/database/users/');$aFileList = array();while ($sFileName=readdir($dDir)) { if ($sFileName!='.' && $sFileName!='..') {$aFileList[]=$sFileName; }}closedir ($dDir); echo count($aFileList)-4; ?>
+<div class="server_stats_users_box_max">Всего жителей: <?php $dDir = opendir($_SERVER['DOCUMENT_ROOT'].'/database/users/');$aFileList = array();while ($sFileName=readdir($dDir)) { if ($sFileName!='.' && $sFileName!='..') {$aFileList[]=$sFileName; }}closedir ($dDir); echo count($aFileList)-4; ?>
 </div>
-<div class="server_stats_users_box"><?php echo "Аккаунты: ".file_size(dir_size($_SERVER['DOCUMENT_ROOT'].'/database/users/'));?></div>
-<div class="server_stats_users_box"><?php echo "Лог чата: ".file_size(filesize($_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/lgchat86123.txt')); ?></div>
+<div class="server_stats_users_box"><?php echo "Количество смертей: ".$deaths;?></div>
+<div class="server_stats_users_box"><?php echo "Среднее время в игре: ".$out_times; ?></div>
 
 
 
@@ -195,23 +200,11 @@ float:left;
 
 <script type="text/javascript">
 var procent = "<?php 
-$busySpace = (disk_total_space("/") - disk_free_space("/")) / 1048576;
-if ($busySpace >= 1024) {
-	$busySpace /= 1024;
-}
-$totalSpace = disk_total_space("/") / 1048576;
-if ($totalSpace >= 1024) {
-	$totalSpace /= 1024;
-}
-echo round(round($busySpace, 1)/round($totalSpace, 1)*100, 1);
+echo 40;
 ?>";
 $('#pb_server_stats div').stop(true).animate({width: procent + '%'});
 $('#pb_server_stats div').text(procent + '%');
 </script>
-
-
-
-
 
 <?php
 function file_size($size)
@@ -237,3 +230,4 @@ closedir($dirstream);
 return $totalsize;
 }
 ?>
+
