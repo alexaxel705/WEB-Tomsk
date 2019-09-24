@@ -44,12 +44,12 @@ while(list($key, $val) = each($dat)){
     obj.style.width = obj.contentWindow.document.body.scrollWidth+'px';
   }
   
-  function showmap() {
+	function showmap() {
         document.getElementById("map").src = "http://109.227.228.4/engine/include/MTA/stats/zonesmap.php";
     }
-  function showdeaths() {
+	function showdeaths() {
         document.getElementById("map").src = "http://109.227.228.4/engine/include/MTA/stats/deathmap.php";
-    }
+    }  
 </script>
 
 <div id="server_stats_all_table">
@@ -74,6 +74,18 @@ while(list($key, $val) = each($dat)){
 </div>
 <div class="server_stats_users_box"><?php echo "Количество смертей: ".$deaths;?></div>
 <div class="server_stats_users_box"><?php echo "Среднее время в игре: ".$out_times; ?></div>
+<div class="server_stats_users_box">
+Популярные фразы: <br />
+	<?php
+		include $_SERVER['DOCUMENT_ROOT'].'/engine/include/function.php';
+		$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/words.arr'), true);
+		
+		foreach ($dat as $x => $value) {
+			$text = $x;
+			echo $value.": ".$text."<br />";
+		}
+	?>
+</div>
 
 
 

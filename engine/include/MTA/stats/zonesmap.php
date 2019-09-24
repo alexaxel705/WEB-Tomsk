@@ -30,7 +30,7 @@
 			foreach ($value as  $y => $val3) {
 				$x2 = ($x+3000)/10;
 				$y2 = (6000-($y+3000))/10;
-				echo '<circle fill-opacity="'.($val3/40).'" r="1" cx="'.$x2.'" cy="'.$y2.'" fill="red"/>';
+				echo '<circle fill-opacity="'.($val3/100).'" r="1" cx="'.$x2.'" cy="'.$y2.'" fill="red"/>';
 			}
 		}
 	?>
