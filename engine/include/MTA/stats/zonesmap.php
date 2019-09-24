@@ -3,10 +3,31 @@
 
 	
 	<?php
-	
+		include $_SERVER['DOCUMENT_ROOT'].'/engine/include/function.php';
 		$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/zones.arr'), true);
-		while(list($x, $val2) = each($dat)){
-			while(list($y, $val3) = each($val2)){
+		
+		$count = 0;
+		foreach ($dat as $x => $value) {
+			foreach ($value as  $y => $val3) {
+				$count = $count+1;
+			}
+		}
+		
+		if($count > 50000) {
+			foreach ($dat as $x => $value) {
+				foreach ($value as  $y => $val3) {
+					$val3 = $val3-1;
+					if($val3 == 0) {
+						unset($dat[$x][$y]); 
+					}
+				}
+			}
+			write_wb($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/zones.arr', json_encode($dat));
+		}
+		
+		
+		foreach ($dat as $x => $value) {
+			foreach ($value as  $y => $val3) {
 				$x2 = ($x+3000)/10;
 				$y2 = (6000-($y+3000))/10;
 				echo '<circle fill-opacity="'.($val3/40).'" r="1" cx="'.$x2.'" cy="'.$y2.'" fill="red"/>';
