@@ -10,7 +10,7 @@ if(!isset($_SESSION['username']))
 		exit('Необходима регистрация.');
 	}
 }
-
+ 
 echo start_job();
 	
 if(isset($_SESSION['username']))
