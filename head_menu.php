@@ -25,8 +25,7 @@
 <a href="/" tabindex="1" class="nav_a">Главная страница</a>
 <a tabindex="2" class="nav_a" href="/chat.php">Чат</a>
 <!-- <a tabindex="3" class="nav_a" href="/forum/index.php">Форум</a> -->
-<a tabindex="4" class="nav_a" href="/engine/include/service/index.php">Сервисы</a>
-<a tabindex="5" class="nav_a" href="/engine/include/stats/stats.php">Статистика</a>
+<a tabindex="5" class="nav_a" href="/engine/include/MTA/stats/stats.php">Статистика</a>
 <a tabindex="6" class="nav_a" href="/database/users_list.php">Пользователи</a>
 <a tabindex="7" class="nav_a" href="/database/faq.php">Справка</a>
 <span class="right">

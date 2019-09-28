@@ -80,10 +80,23 @@ while(list($key, $val) = each($dat)){
 		include $_SERVER['DOCUMENT_ROOT'].'/engine/include/function.php';
 		$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/words.arr'), true);
 		
+		uasort($dat, 'cmp'); // сортируем по значению
+		$dat = array_slice($dat, -20); // 20 самых популярых
+		
+		$out = "";
 		foreach ($dat as $x => $value) {
 			$text = $x;
-			echo $value.": ".$text."<br />";
+			$out = $value.": ".$text."<br />".$out;
 		}
+		echo $out;
+		
+		
+		function cmp($a, $b) {
+		if ($a == $b) {
+			return 0;
+		}
+		return ($a < $b) ? -1 : 1;
+}
 	?>
 </div>
 

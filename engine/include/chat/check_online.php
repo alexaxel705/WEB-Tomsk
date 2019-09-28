@@ -72,16 +72,16 @@
 				$color_nick_rgb=hex2rgb($color_nick);
 				if($color_nick_rgb[0]+$color_nick_rgb[1]+$color_nick_rgb[2] > 100)
 				{
-					$new_name='<span title="Написать" onclick="print_message(this); return false;" style="border-bottom:1px dashed;color:'.$color_nick.';" class="left sh_black chat_color_nick_o cursor_pointer '.$style_time_out.'">'.$login_trans.'</span>';
+					$new_name='<span title="Написать" onclick="print_message(this); return false;" style="color:'.$color_nick.';" class="left sh_black chat_color_nick_o cursor_pointer '.$style_time_out.'">'.$login_trans.'</span>';
 				}
 				else
 				{
-					$new_name='<span title="Написать" onclick="print_message(this); return false;" style="border-bottom:1px dashed;color:'.$color_nick.';" class="sh_white chat_color_nick_o cursor_pointer '.$style_time_out.'">'.$login_trans.'</span>';
+					$new_name='<span title="Написать" onclick="print_message(this); return false;" style="color:'.$color_nick.';" class="sh_white chat_color_nick_o cursor_pointer '.$style_time_out.'">'.$login_trans.'</span>';
 				}
 			}
 			else
 			{
-				$new_name='<span title="Написать" onclick="print_message(this); return false;" style="border-bottom:1px dashed;color:#EEE;" class="sh_black chat_color_nick_o cursor_pointer '.$style_time_out.'">'.file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/guest/'.$users_name.'.txt').'</span>';
+				$new_name='<span title="Написать" onclick="print_message(this); return false;" style="color:#EEE;" class="sh_black chat_color_nick_o cursor_pointer '.$style_time_out.'">'.file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/guest/'.$users_name.'.txt').'</span>';
 				$login_trans=file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/guest/'.$users_name.'.txt');
 				$shadow="sh_black";
 			}
@@ -112,11 +112,11 @@
 			{
 				if($_SERVER['REQUEST_TIME']-json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/on/'.$users_name.'.arr'))->old_mt > 600)//Автосмена статуса
 				{
-					$status = '<abbr style="color:red;" class="left" title="Отошел '.$out_times.'">&#10008;</abbr>';
+					$status = '<b style="color:red;" class="left" title="Отошел '.$out_times.'">&#10008;</b>';
 				}
 				else
 				{
-					$status = '<abbr style="color:#32CD32;" title="На связи '.$out_times.'" class="left">&#10004;</abbr>';
+					$status = '<b style="color:#32CD32;" title="На связи '.$out_times.'" class="left">&#10004;</b>';
 				}
 			}
 			
@@ -150,19 +150,19 @@
 			{
 				if(file_get_contents($USR.'/sex.txt') == '2')
 				{
-					$sex = '<abbr style="color:pink;" class="left" title="Женщина">&#9792;</abbr>';
+					$sex = '<b style="color:pink;" class="left" title="Женщина">&#9792;</b>';
 					$female_arr[] = $sex.$status.$title;
 				}
 				else if(file_get_contents($USR.'/sex.txt') == '1')
 				{
-					$sex = '<abbr style="color:#00CCFF;" class="left" title="Мужчина">&#9794;</abbr>';
+					$sex = '<b style="color:#00CCFF;" class="left" title="Мужчина">&#9794;</b>';
 					$male_arr[] = $sex.$status.$title;
 				}
 
 			}
 			else
 			{
-				$sex = '<abbr style="color:white;" class="left" title="Пол неизвестен">x</abbr>';
+				$sex = '<b style="color:white;" class="left" title="Пол неизвестен">x</b>';
 				$guest_arr[] = $sex.$status.$title;
 			}
 		}
@@ -197,7 +197,7 @@
 
 
 	$MTA = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/online.txt');
-	$MTA = str_replace("<br />", "\n", $MTA);
+	$MTA = str_replace("<br />", " [MTA]\n", $MTA);
 	$arr = explode("\n", $MTA);
 
 	foreach($arr as $player) {

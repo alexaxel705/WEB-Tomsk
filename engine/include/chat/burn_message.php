@@ -63,7 +63,7 @@
 		$text_color = $file->one;
 	}
 
-	$name = "\n".'<!--<[name_'.$usr_name.']>--><time <[time_v]>>['.date("H:i:s").']</time> <b onclick="print_message(this); return false;" class="cursor_pointer" style="color:'.$nick_color.';">'.$usr_name_tr.'</b>: <span class="chat_usr_message_text" style="color:'.$text_color.'">';
+	$name = "\n".'<!--<[name_'.$usr_name.']>-->['.date("H:i:s").'] <b onclick="print_message(this); return false;" class="cursor_pointer" style="color:'.$nick_color.';">'.$usr_name_tr.'</b>: <span class="chat_usr_message_text" style="color:'.$text_color.'">';
 
 
 

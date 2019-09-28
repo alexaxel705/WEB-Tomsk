@@ -113,46 +113,7 @@ onsubmit="document.getElementById('res').innerHTML=''; return true;">
 	<button onclick="send_settings()">Отправить</button>
 	<div id="output_1"></div>
 </fieldset>
-	
-	
-<fieldset><legend>Настройка соединений</legend>
-	<?		
-		$set_connection = unserialize(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/users/'.$_SESSION['username'].'/set_connection.arr'));
-		$traffic = 0;
-		if($set_connection['head_update'] == 1)
-		{
-			$check_head_update = 'checked';
-			$traffic += 9;
-		}
-	?>
-	<b>Текущая конфигурация: <span id="traffic_out"><? echo $traffic;?></span> байт\сек</b><br /><br />
-	Проверять новые сообщения в анкете?<input type="checkbox" id="checkbox_head_update" <? echo $check_head_update;?>> (9 байт\сек)<br />
-	<button onclick="send_internet_connection_settings()">Отправить</button>
-	<div id="output_2"></div>
-</fieldset>
-	
-	
-<fieldset><legend>Настройка чата</legend>
-Новые сообщения в чате:
-<select name="menu" size="1" id="chat_t_or_b">
-<option value="0" <?if($conf[0] == '0')echo 'selected';?>>Снизу</option>
-<option value="1" <?if($conf[0] == '1')echo 'selected';?>>Сверху</option>
-</select><br />
-
-
-Смайлы в чате:
-<?
-
-?>
-<input type="checkbox" id="chat_smile_on_off" <?if($conf[2] == 'true')echo 'checked';?>><br />
-
-
-
-
-
-<button onclick="send_chat_settings()">Отправить</button>
-<div id="output_3"></div>
-</fieldset><br />
+<br />
 
 
 </center></div>
@@ -165,33 +126,8 @@ function avatar_upload_ok(obj)
 	document.getElementById("res").innerHTML="Аватар успешно загружен.";
 	$('#upload_avatar_img').attr("src","http://"+window.location.host+obj);
 }
-function send_chat_settings()
-{
-	$.post("/engine/include/users/settings_act.php",
-	{
-		config: '3',
-		chat_t_or_b: document.getElementById('chat_t_or_b').value,
-		chat_smile_on_off: $("#chat_smile_on_off").prop('checked')
-	},
-	function (data)
-	{
-		document.getElementById("output_3").innerHTML = data['out'];
-	});
-}
 
-function send_internet_connection_settings()
-{
-	$.post("/engine/include/users/settings_act.php",
-	{
-		config: '2',
-		head_update: document.getElementById("checkbox_head_update").checked
-	},
-	function (data)
-	{
-		document.getElementById("output_2").innerHTML = data['out'];
-		document.getElementById("traffic_out").innerHTML = data['traffic'];
-	});
-}
+
 
 function send_settings()
 {

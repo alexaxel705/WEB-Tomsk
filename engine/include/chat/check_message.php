@@ -43,22 +43,6 @@
 				}		
 			}
 
-		
-			if(file_exists($_SERVER['DOCUMENT_ROOT'].'/database/users/'.$_SESSION['username'].'/time_v.txt'))
-			{
-				if(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/users/'.$_SESSION['username'].'/time_v.txt') == 'false')//Не отображать смайлы
-				{
-					$fp[$old]=str_replace('<[time_v]>',' style="display:none;"',$fp[$old]);
-				}
-				else
-				{
-					$fp[$old]=str_replace('<[time_v]>','',$fp[$old]);
-				}
-			}
-			else
-			{
-				$fp[$old]=str_replace('<[time_v]>',' style="display:none;"',$fp[$old]);
-			}
 			if (isset($_SESSION['username']))
 			{
 				$real_nick_name = GetInTranslit_fp_tr(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/users/'.$_SESSION['username'].'/login_translit.txt'));//Для русских имен.
