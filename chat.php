@@ -10,7 +10,7 @@ if(!isset($_SESSION['username']))
 		exit('Необходима регистрация.');
 	}
 }
- 
+
 echo start_job();
 	
 if(isset($_SESSION['username']))
@@ -558,6 +558,7 @@ function engine_check_online()
 	"/engine/include/chat/check_online.php",
 	function (data)
 	{
+		if(!data['MTA']) {data['MTA'] = ""}
 		$("#users_check_online").html(data['online_female']+data['online_male']+data['online_guest']+data['MTA']);
 		document.getElementById('chat_profile_info_id_2_n').innerHTML = divname_users_check_online.getElementsByTagName('li').length;
 		if(divname_users_check_online.getElementsByTagName('li').length == 0)

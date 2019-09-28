@@ -197,7 +197,7 @@
 
 
 	$MTA = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/online.txt');
-	$MTA = str_replace("<br />", " [MTA]\n", $MTA);
+	$MTA = str_replace("<br />", "\n", $MTA);
 	$arr = explode("\n", $MTA);
 
 	foreach($arr as $player) {
