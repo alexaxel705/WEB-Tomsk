@@ -222,9 +222,22 @@
 	if(isset($Minecraft)) {
 		$arr = json_decode($Minecraft);
 		$Minecraft = "";
+
 		foreach($arr as $player) {
-			$Minecraft = $Minecraft.$player."<br />";
+		$player = trim($player);
+		if($player != "") {
+			$w++;
+			if(fmod($w,2)==0) {
+				$Minecraft .= $cfc_1.'<span title="Написать" onclick="print_message(this); return false;" style="color:#CCCCCC" class="left sh_black chat_color_nick_o cursor_pointer">'.$player.'</span></li>';
+			}
+			else {
+				$Minecraft .= $cfc_2.'<span title="Написать" onclick="print_message(this); return false;" style="color:#EEEEEE;" class="left sh_black chat_color_nick_o cursor_pointer">'.$player.'</span></li>';
+			}
 		}
+	}
+		
+		
+		
 	}
 	
 	die(json_encode(
