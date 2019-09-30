@@ -15,4 +15,21 @@
 
 	fwrite($burn_file, "\n".'<!--<[name_'.$input[0].']>-->['.date("H:i:s").'] [MTA] <b onclick="print_message(this); return false;" class="cursor_pointer bold" style="color:'.$input[2].';">'.$input[0].'</b>: <span class="chat_usr_message_text bold" style="color:#000000">'.$input[1].'</span>');//Записываем сообщение
 	fclose($burn_file);
+	
+	
+	
+		// Minecraft
+	$url = 'http://minecraft.neeboo.ru/chat/send';
+	$params = array(
+		'name' => $input[0], 
+		'message' => $input[1],
+	);
+	$result = file_get_contents($url, false, stream_context_create(array(
+		'http' => array(
+			'method'  => 'POST',
+			'header'  => 'Content-type: application/x-www-form-urlencoded',
+			'content' => http_build_query($params)
+		)
+	)));
+	//-------------
 ?>

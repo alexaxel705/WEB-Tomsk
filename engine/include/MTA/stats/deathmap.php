@@ -10,7 +10,7 @@
 			while(list($key2, $val2) = each($val)){
 				$key = ($key+3000)/10;
 				$key2 = (6000-($key2+3000))/10;
-				echo '<circle fill-opacity="0.5" r="'.($val2*2).'" cx="'.$key.'" cy="'.$key2.'" fill="red"/>';
+				echo '<circle fill-opacity="0.25" r="'.($val2*2).'" cx="'.$key.'" cy="'.$key2.'" fill="red"/>';
 			}
 		}
 	?>

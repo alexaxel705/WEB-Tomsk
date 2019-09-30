@@ -178,6 +178,31 @@ $fp[$old]=str_replace(' <img alt="" class="chat_sc" src="/engine/images/smile/ma
 		}
 	}
 	session_write_close();
+	
+	
+
+	$Minecraft = file_get_contents('http://minecraft.neeboo.ru/chat/get');
+	
+	if(isset($Minecraft)) {
+		if($Minecraft != ""){ 
+			$MinecraftOld = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/minecraft.txt');
+			if($MinecraftOld != $Minecraft) {
+				$arr = json_decode($Minecraft);
+				$burn_file = fopen($_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/lgchat86123.txt', 'a+');
+				fwrite($burn_file, "\n".'<!--<[name_'.$arr->name.']>-->['.date("H:i:s").'] [Minecraft] <b onclick="print_message(this); return false;" class="cursor_pointer bold" style="color:#000000;">'.$arr->name.'</b>: <span class="chat_usr_message_text bold" style="color:#000000">'.$arr->message.'</span>');//Записываем сообщение
+				fclose($burn_file);
+				
+				write_wb($_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/minecraft.txt', $Minecraft);
+				
+				include("../MTA/mta_sdk.php");
+				$SERVER = new mta("109.227.228.4", 22005);
+				$RESOURCE = $SERVER->getResource("chat");
+				$RESOURCE->call("BurnChatMSG", $arr->name, $arr->message, "#000000");
+			}
+		}
+	}
+	
+	
 	die(json_encode(
 	  array(
 		'm' => $out,//Сообщение

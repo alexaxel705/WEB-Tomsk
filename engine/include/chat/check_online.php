@@ -218,7 +218,14 @@
 	
 	session_write_close();
 	
-	
+	$Minecraft = file_get_contents('http://minecraft.neeboo.ru/server/online');
+	if(isset($Minecraft)) {
+		$arr = json_decode($Minecraft);
+		$Minecraft = "";
+		foreach($arr as $player) {
+			$Minecraft = $Minecraft.$player."<br />";
+		}
+	}
 	
 	die(json_encode(
 	  array(
@@ -227,7 +234,8 @@
 		'online_guest' => $out_guest_arr,
 		'g_ve' => $g_ve,
 		'g_vd' => $g_vd,
-		'MTA' => $out
+		'MTA' => $out,
+		'Minecraft' => $Minecraft
 	  )
 	));
 
