@@ -1,1 +1,2 @@
-{"name":"Tanker","message":"\u043d\u043e\u0440\u043c?"}
+<br />
+<b>Fatal error</b>:   in <b>C:\Users\Tanker\WebServer\subdomains\neeboo_subd\minecraft\application\core\pdo.php</b> on line <b>18</b><br />

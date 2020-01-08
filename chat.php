@@ -124,11 +124,6 @@ text-align:center;
 
 .chat_users_online_frame{list-style-type: none;height:23px;line-height:23px;padding:1px;}
 
-#users_profile_info{
-overflow-y:auto;
-width:100%;
-max-height:72px;
-}
 
 #user_input{
 height:30px;
@@ -154,7 +149,6 @@ text-indent:2px;
 .chat_old_users_message{border-left:5px solid #CEDB60;}
 .chat_system_message{
 border-left:5px solid #6495EB;
-display:none;
 }
 
 .chat_users_private_messages{
@@ -214,7 +208,6 @@ if($file->u == '1')$b_u = ' chat_hover_button';
 		чел.
 </div>
 
-<div id="users_profile_info" class="right"></div>
 </td>
 
 
@@ -432,7 +425,7 @@ function chat_scroll()
 
 function create_prompt_tray(obj)
 {
-	$('#users_profile_info').prepend('<div class="chat_prompt_listen"><div>'+obj+'</div></div>');
+	alert(obj)
 	resize_window();
 }
 
@@ -559,7 +552,8 @@ function engine_check_online()
 	function (data)
 	{
 		if(!data['MTA']) {data['MTA'] = ""}
-		$("#users_check_online").html(data['online_female']+data['online_male']+data['online_guest']+data['MTA']);
+		
+		$("#users_check_online").html(data['online_female']+data['online_male']+data['online_guest']+data['MTA']+data['Minecraft']);
 		document.getElementById('chat_profile_info_id_2_n').innerHTML = divname_users_check_online.getElementsByTagName('li').length;
 		if(divname_users_check_online.getElementsByTagName('li').length == 0)
 		{
@@ -1281,7 +1275,7 @@ function resize_window()
 	document.getElementById('chat_left_body').style.height = window_height-main_menu_header_block_js+"px";
 	document.getElementById('chat_right_body').style.height = window_height-main_menu_header_block_js+"px";
 	document.getElementById('chat_frame').style.height = window_height-72-main_menu_header_block_js+"px";
-	document.getElementById('users_check_online').style.height = window_height-1-$('#users_profile_info').height()-$('#chat_profile_info_id_2').height()-main_menu_header_block_js+"px";
+	document.getElementById('users_check_online').style.height = window_height-1-$('#chat_profile_info_id_2').height()-main_menu_header_block_js+"px";
 	$('#chat_frame').animate({scrollTop:'+=9999px'});
 }
 window.onresize=function(){resize_window();};

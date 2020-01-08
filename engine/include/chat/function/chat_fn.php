@@ -159,7 +159,7 @@ function start_job()
 		$usr_name = $_SESSION['guestname'];
 		$usr_name_tr = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/database/guest/'.$_SESSION['guestname'].'.txt');
 	}
-	$p='create_prompt_tray("'.date("H:i").' Заходит '.$usr_name_tr.'");';
+	$p=date("H:i").' Заходит '.$usr_name_tr.';';
 
 	if (isset($_SESSION['username']))
 	{
@@ -231,6 +231,6 @@ function start_job()
 	else exit('Чат только для зарегистрированных пользователей!');
 }
 
-function sys_msg_ent($n,$p){return "\r\n".'<div class="chat_all_message_style chat_system_message"><script>'.$p.'</script><span <[time_v]>>['.date("H:i:s").'] </span><b>Системное оповещение</b>: Заходит "<span class="tx_c_9ACD32 cursor_pointer" onclick="print_message(this); return false;">'.$n.'</span>"</div>';}
-function sys_msg_ext($n){return "\r\n".'<!--<[name_system]>--><div class="chat_all_message_style chat_system_message"><span <[time_v]>>['.date("H:i:s").'] </span><b>Системное оповещение</b>: Выходит "<span class="tx_c_9ACD32 cursor_pointer" onclick="print_message(this); return false;">'.$n.'</span>"</div>';}
+function sys_msg_ent($n){return "\r\n".'<!--<[name_system]>--><div class="chat_all_message_style chat_system_message">['.date("H:i:s").'] <b>Системное оповещение</b>: "<span class="tx_c_9ACD32 cursor_pointer" onclick="print_message(this); return false;">'.$n.'</span>" Подключился к чату</div>';}
+function sys_msg_ext($n){return "\r\n".'<!--<[name_system]>--><div class="chat_all_message_style chat_system_message">['.date("H:i:s").'] <b>Системное оповещение</b>: "<span class="tx_c_9ACD32 cursor_pointer" onclick="print_message(this); return false;">'.$n.'</span>" Отключился от чата</div>';}
 ?>
