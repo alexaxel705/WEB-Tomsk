@@ -4,6 +4,7 @@
 	
 	<?php
 		include $_SERVER['DOCUMENT_ROOT'].'/engine/include/function.php';
+		include($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/mta_sdk.php');
 		$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/zones.arr'), true);
 		
 		$count = 0;
@@ -12,13 +13,16 @@
 				$count = $count+1;
 			}
 		}
-		
-		if($count > 50000) {
+		echo $count;
+		if($count > 100000) {
 			foreach ($dat as $x => $value) {
 				foreach ($value as  $y => $val3) {
 					$val3 = $val3-1;
 					if($val3 == 0) {
 						unset($dat[$x][$y]); 
+					}
+					else {
+						$dat[$x][$y] = $val3;
 					}
 				}
 			}
