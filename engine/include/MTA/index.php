@@ -13,7 +13,7 @@
 	$burn_file = fopen($_SERVER['DOCUMENT_ROOT'].'/engine/include/chat/lgchat86123.txt', 'a+');
 	
 
-	fwrite($burn_file, "\n".'<!--<[name_'.$input[0].']>-->['.date("H:i:s").'] [MTA] <b onclick="print_message(this); return false;" class="cursor_pointer bold" style="color:'.$input[2].';">'.$input[0].'</b>: <span class="chat_usr_message_text bold" style="color:#000000">'.$input[1].'</span>');//Записываем сообщение
+	fwrite($burn_file, "\n".'<!--<[name_'.$input[0].']>-->['.date("H:i:s").'] [MTA] <b onclick="print_message(this); return false;" class="cursor_pointer bold" style="color:'.$input[2].';">'.$input[0].'</b>: <span class="chat_usr_message_text" style="color:#000000">'.$input[1].'</span>');//Записываем сообщение
 	fclose($burn_file);
 	
 	

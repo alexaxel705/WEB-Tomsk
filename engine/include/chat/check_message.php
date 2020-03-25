@@ -181,7 +181,7 @@ $fp[$old]=str_replace(' <img alt="" class="chat_sc" src="/engine/images/smile/ma
 	
 	
 
-	$Minecraft = file_get_contents('http://minecraft.neeboo.ru/chat/get');
+	//$Minecraft = file_get_contents('http://minecraft.neeboo.ru/chat/get');
 	
 	if(isset($Minecraft)) {
 		if($Minecraft != ""){ 

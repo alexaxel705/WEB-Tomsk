@@ -11,6 +11,20 @@
 	$text = $input[1];
 	$razdel = $input[2];
 	
+	
+	if($input[3]) {
+		$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/words.arr'), true);
+		
+		$text = $input[1];
+		if(isset($dat[$text])) {
+			$dat[$text] = $dat[$text]+1;
+		} else {
+			$dat[$text] = 1;
+		}
+		write_wb($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/words.arr', json_encode($dat));
+	}
+	
+	
 	$md5 = md5($text);
 	if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/'.$razdel.'/'.$md5.'.wav"')) {
 		$text = GetInTranslit($text);
@@ -25,19 +39,7 @@
 		mta::doReturn($input[0], $input[1], $input[2]);
 	}
 	
-	
-	
-	$dat = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/words.arr'), true);
-	
-	$text = $input[1];
-	if(isset($dat[$text])) {
-		$dat[$text] = $dat[$text]+1;
-	} else {
-		$dat[$text] = 1;
-	}
-	write_wb($_SERVER['DOCUMENT_ROOT'].'/engine/include/MTA/stats/words.arr', json_encode($dat));
-	
-	
+
 	mta::doReturn(false);
 		
 	function uft8_exec($cmd,&$output=null,&$return=null)

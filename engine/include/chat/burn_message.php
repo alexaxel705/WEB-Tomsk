@@ -118,18 +118,18 @@ $message=str_replace('(mir1.gif)',' <img alt="" class="chat_sc" src="/engine/ima
 
 
 	// Minecraft
-	$url = 'http://minecraft.neeboo.ru/chat/send';
-	$params = array(
-		'name' => $usr_name_tr, 
-		'message' => $message,
-	);
-	$result = file_get_contents($url, false, stream_context_create(array(
-		'http' => array(
-			'method'  => 'POST',
-			'header'  => 'Content-type: application/x-www-form-urlencoded',
-			'content' => http_build_query($params)
-		)
-	)));
+	//$url = 'http://minecraft.neeboo.ru/chat/send';
+	//$params = array(
+	//	'name' => $usr_name_tr, 
+	//	'message' => $message,
+	//);
+	//$result = file_get_contents($url, false, stream_context_create(array(
+	//	'http' => array(
+	//		'method'  => 'POST',
+	//		'header'  => 'Content-type: application/x-www-form-urlencoded',
+	//		'content' => http_build_query($params)
+	//	)
+	//)));
 	//-------------
 
 

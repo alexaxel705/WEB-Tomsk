@@ -217,8 +217,11 @@
 	//'.$login_trans.
 	
 	session_write_close();
+
 	
-	$Minecraft = file_get_contents('http://minecraft.neeboo.ru/server/online');
+	//$Minecraft = file_get_contents('http://minecraft.neeboo.ru/server/online');
+	
+
 	if(isset($Minecraft)) {
 		$arr = json_decode($Minecraft);
 		if(isset($arr)) {
