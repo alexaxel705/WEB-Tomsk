@@ -141,33 +141,6 @@ overflow-x:hidden;
 
 #user_input img{max-height:30px;vertical-align:middle;}
 
-.chat_all_message_style{
-margin:1px;
-text-indent:2px;
-}
-
-.chat_old_users_message{border-left:5px solid #CEDB60;}
-.chat_system_message{
-border-left:5px solid #6495EB;
-}
-
-.chat_users_private_messages{
-border-bottom:1px solid #EEE3E3;
-background-color:#FFF3F3;
-border-left:5px solid #D6A4E5;
-}
-
-.chat_users_my_private_messages{
-border-bottom:1px solid #EEE3E3;
-background-color:#FFF3F3;
-border-left:5px solid pink;
-}
-
-.chat_users_only_you{
-border-bottom:1px solid #E9E9EE;
-background-color: #F9F9FF;
-border-left:5px solid #B7CBED;
-}
 
 
 .chat_border{border:1px solid <? echo $chat_border;?>;}
@@ -206,6 +179,7 @@ if($file->u == '1')$b_u = ' chat_hover_button';
 		в чате 
 		<span id="chat_profile_info_id_2_n">OVER9000</span> 
 		чел.
+<a title="Лог чата" class="right" target="_blank" style="padding-right:5px;text-decoration: none;color:#CCCCCC;" href="/log.php">☰</a>
 </div>
 
 </td>
