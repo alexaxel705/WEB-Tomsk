@@ -25,6 +25,35 @@ a:hover {color:#D73D3D;}
 border-bottom:1px dashed red;
 cursor:help;
 }
+.chat_all_message_style{
+margin:1px;
+text-indent:2px;
+}
+
+.chat_old_users_message{border-left:5px solid #CEDB60;}
+
+.chat_system_message{
+border-left:5px solid #6495EB;
+}
+
+.chat_users_private_messages{
+border-bottom:1px solid #EEE3E3;
+background-color:#FFF3F3;
+border-left:5px solid #D6A4E5;
+}
+
+.chat_users_my_private_messages{
+border-bottom:1px solid #EEE3E3;
+background-color:#FFF3F3;
+border-left:5px solid pink;
+}
+
+.chat_users_only_you{
+border-bottom:1px solid #E9E9EE;
+background-color: #F9F9FF;
+border-left:5px solid #B7CBED;
+}
+
 
 .main_act_list{
 text-indent:5px;
