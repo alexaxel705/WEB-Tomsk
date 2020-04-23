@@ -114,7 +114,7 @@ background-color:#4F4F4F;
 height:40px;
 }
 
-.chat_users_online_frame{list-style-type: none;height:40px;line-height: 40px;font-size:35px;}
+.chat_users_online_frame{list-style-type: none;height:45px;line-height: 40px;font-size:35px;}
 
 #chat_online_list{
 display:none; 
